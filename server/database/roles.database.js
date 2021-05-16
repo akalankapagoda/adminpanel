@@ -13,9 +13,10 @@ class RolesDatabaseHandler {
     pool.query(getRoleQuery(id) , (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
-      if (results.rowCount > 0) {
+      if (results) {
 
         callback(createRoleObjectFromRow(results.rows[0]));
 
@@ -31,9 +32,15 @@ class RolesDatabaseHandler {
     pool.query(listRolesQuery(filter), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
-      callback(results.rows.map(createRoleObjectFromRow));
+      if (results) {
+        callback(results.rows.map(createRoleObjectFromRow));
+      } else {
+        callback();
+      }
+      
     })
   };
 
@@ -42,6 +49,7 @@ class RolesDatabaseHandler {
     pool.query(insertRoleQuery(role), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();
@@ -54,6 +62,7 @@ class RolesDatabaseHandler {
     pool.query(updateRoleQuery(role), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();
@@ -66,6 +75,7 @@ class RolesDatabaseHandler {
     pool.query(deleteRoleQuery(id), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();

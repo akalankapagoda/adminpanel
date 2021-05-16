@@ -4,6 +4,7 @@
 
 import rolesDatabaseHandler from '../database/roles.database.js';
 import Role from '../model/role.js';
+import {handleDatabaseError, handleGenericError} from '../error/error.handler.js';
 
 class UsersController {
     // Create and Save a new Users

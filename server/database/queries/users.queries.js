@@ -37,3 +37,19 @@ export function deleteUserQuery(id) {
         values: [id]
     };
 }
+
+export function getUserByUsernameQuery(username) {
+    return {
+        name: 'user.username-get',
+        text: "SELECT id, username, name, email, salt, hash FROM users WHERE username = $1",
+        values: [username]
+    };
+}
+
+export function getUserWithHashQuery(user_id) {
+    return {
+        name: 'user.userhash-get',
+        text: "SELECT id, username, name, email, salt, hash FROM users WHERE id = $1",
+        values: [user_id]
+    };
+}

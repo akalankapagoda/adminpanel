@@ -15,7 +15,7 @@ export function generateUserHash(user, password) {
 
 // Method to check the entered password is correct or not 
 export function validatePassword(salt, hash, password) {
-    var hash = crypto.pbkdf2Sync(password,
+    var generatedHash = crypto.pbkdf2Sync(password,
         salt, 1000, 64, `sha512`).toString(`hex`);
-    return hash === hash;
+    return generatedHash === hash;
 };

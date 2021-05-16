@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
-    "test": "test"
+    "test": "mocha"
   },
   "author": "akalanka",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "pg": "^8.6.0"
   },
   "devDependencies": {
+    "mocha": "^8.4.0",
     "nodemon": "^2.0.7"
   }
 }

@@ -4,6 +4,7 @@
 
 import privilegesDatabaseHandler from '../database/privileges.database.js';
 import Privilege from '../model/privilege.js';
+import {handleDatabaseError, handleGenericError} from '../error/error.handler.js';
 
 class PrivilegesController {
     // Create and Save a new Privileges

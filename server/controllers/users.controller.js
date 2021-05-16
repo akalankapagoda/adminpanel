@@ -4,7 +4,8 @@
 
 import usersDatabaseHandler from '../database/users.database.js';
 import User from '../model/user.js';
-import {generateUserHash} from '../security/password.manager.js';
+import {generateUserHash} from '../auth/password.manager.js';
+import {handleDatabaseError, handleGenericError} from '../error/error.handler.js';
 
 class UsersController {
     // Create and Save a new Users

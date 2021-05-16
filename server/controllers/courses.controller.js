@@ -10,7 +10,13 @@ class CoursesController {
         // Create and Save a new Course
     create = (req, res) => {
 
-        var userId = '1'; // TODO: Parse userId from middleware
+        var userId;
+        
+        if (req.user) {
+            userId = req.user.id;
+        } else {
+            userId = null;
+        }
 
         var course = new Course(null, req.body.name, req.body.description, req.body.credits, userId, req.body.questions);
 
@@ -65,7 +71,11 @@ class CoursesController {
     // Update a course identified by the courseId in the request
     update = (req, res) => {
 
-        var userId = '1';   // TODO: Parse userId from middleware
+        if (req.user) {
+            userId = req.user.id;
+        } else {
+            userId = null;
+        }
 
         var course = new Course(req.body.id, req.body.name, req.body.description, req.body.credits, userId, req.body.questions);
 

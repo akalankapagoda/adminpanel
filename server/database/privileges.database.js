@@ -13,12 +13,11 @@ class PrivilegesDatabaseHandler {
     pool.query(getPrivilegeQuery(id) , (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
-      if (results.rowCount > 0) {
-
+      if (results) {
         callback(createPrivilegeObjectFromRow(results.rows[0]));
-
       } else {
         callback({error: 'notFound'});
       }
@@ -31,9 +30,14 @@ class PrivilegesDatabaseHandler {
     pool.query(listPrivilegesQuery(filter), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
-      callback(results.rows.map(createPrivilegeObjectFromRow));
+      if (results) {
+        callback(results.rows.map(createPrivilegeObjectFromRow));
+      } else {
+        callback();
+      }
     })
   };
 
@@ -42,6 +46,7 @@ class PrivilegesDatabaseHandler {
     pool.query(insertPrivilegeQuery(privilege), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();
@@ -54,6 +59,7 @@ class PrivilegesDatabaseHandler {
     pool.query(updatePrivilegeQuery(privilege), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();
@@ -66,6 +72,7 @@ class PrivilegesDatabaseHandler {
     pool.query(deletePrivilegeQuery(id), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();

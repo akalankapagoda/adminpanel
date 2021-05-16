@@ -13,12 +13,11 @@ class CoursesDatabaseHandler {
     pool.query(getCourseQuery(id) , (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
-      if (results.rowCount > 0) {
-
+      if (results) {
         callback(createCourseObjectFromRow(results.rows[0]));
-
       } else {
         callback({error: 'notFound'});
       }
@@ -31,9 +30,15 @@ class CoursesDatabaseHandler {
     pool.query(listCoursesQuery(filter), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
-      callback(results.rows.map(createCourseObjectFromRow));
+      if (results) {
+        callback(results.rows.map(createCourseObjectFromRow));
+      } else {
+        callback();
+      }
+      
     })
   };
 
@@ -42,9 +47,11 @@ class CoursesDatabaseHandler {
     pool.query(insertCourseQuery(course), (error, results) => {
       if (error) {
         errorCallback(error);
-      } else {
-        callback();
+        return;
       }
+      
+      callback();
+      
     })
 
   };
@@ -54,6 +61,7 @@ class CoursesDatabaseHandler {
     pool.query(updateCourseQuery(course), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();
@@ -66,6 +74,7 @@ class CoursesDatabaseHandler {
     pool.query(deleteCourseQuery(id), (error, results) => {
       if (error) {
         errorCallback(error);
+        return;
       }
 
       callback();
