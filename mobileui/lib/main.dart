@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'auth/user_repository.dart';
+import 'package:mobileui/config/app_config.dart';
+import 'auth/token_repository.dart';
 
 import 'auth/authentication_bloc.dart';
 import 'auth/authentication_event.dart';
@@ -40,15 +41,20 @@ class MyBlocObserver extends BlocObserver {
   }
 }
 
-void main() {
+void main() async  {
   Bloc.observer = MyBlocObserver();
-  runApp(App(userRepository: UserRepository()));
+
+  WidgetsFlutterBinding.ensureInitialized();
+  final config = await AppConfig.forEnvironment('dev'); // TODO: Get the environment from an argument
+
+  runApp(App(tokenRepository: TokenRepository(config: config), config: config));
 }
 
 class App extends StatefulWidget {
-  final UserRepository userRepository;
+  final TokenRepository tokenRepository;
+  final AppConfig config;
 
-  App({Key key, @required this.userRepository}) : super(key: key);
+  App({Key key, @required this.tokenRepository, @required this.config}) : super(key: key);
 
   @override
   State<App> createState() => _AppState();
@@ -56,11 +62,11 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   AuthenticationBloc authenticationBloc;
-  UserRepository get userRepository => widget.userRepository;
+  TokenRepository get tokenRepository => widget.tokenRepository;
 
   @override
   void initState() {
-    authenticationBloc = AuthenticationBloc(userRepository: userRepository);
+    authenticationBloc = AuthenticationBloc(tokenRepository: tokenRepository);
     authenticationBloc.add(AppStarted());
     super.initState();
   }
@@ -78,6 +84,7 @@ class _AppState extends State<App> {
         BlocProvider<AuthenticationBloc>(create: (_) => authenticationBloc)
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           bloc: authenticationBloc,
           builder: (BuildContext context, AuthenticationState state) {
@@ -85,10 +92,10 @@ class _AppState extends State<App> {
               return SplashPage();
             }
             if (state is AuthenticationAuthenticated) {
-              return HomePage();
+              return HomePage(config: widget.config, tokenRepository: widget.tokenRepository);
             }
             if (state is AuthenticationUnauthenticated) {
-              return LoginPage(userRepository: userRepository);
+              return LoginPage(tokenRepository: tokenRepository);
             }
             if (state is AuthenticationLoading) {
               return LoadingIndicator();

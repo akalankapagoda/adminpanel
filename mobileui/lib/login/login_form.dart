@@ -49,14 +49,35 @@ class _LoginFormState extends State<LoginForm> {
         return Form(
           child: Column(
             children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'username'),
-                controller: _usernameController,
+              Spacer(flex: 5,),
+              Text("Please login"),
+              Spacer(),
+              Row(
+                children: [
+                  Spacer(),
+                  Container(
+                    width: 300,
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: 'username'),
+                      controller: _usernameController,
+                    ),
+                  ),
+                  Spacer()
+                ],
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'password'),
-                controller: _passwordController,
-                obscureText: true,
+              Row(
+                children: [
+                  Spacer(),
+                  Container(
+                    width: 300,
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: 'password'),
+                      controller: _passwordController,
+                      obscureText: true,
+                    ),
+                  ),
+                  Spacer()
+                ],
               ),
               ElevatedButton(
                 onPressed:
@@ -67,6 +88,7 @@ class _LoginFormState extends State<LoginForm> {
                 child:
                 state is LoginLoading ? CircularProgressIndicator() : null,
               ),
+              Spacer(flex: 5,),
             ],
           ),
         );

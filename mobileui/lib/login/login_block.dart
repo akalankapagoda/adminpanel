@@ -5,18 +5,18 @@ import 'package:bloc/bloc.dart';
 
 import 'package:mobileui/auth/authentication_bloc.dart';
 import 'package:mobileui/auth/authentication_event.dart';
-import 'package:mobileui/auth/user_repository.dart';
+import 'package:mobileui/auth/token_repository.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final UserRepository userRepository;
+  final TokenRepository tokenRepository;
   final AuthenticationBloc authenticationBloc;
 
   LoginBloc({
-    @required this.userRepository,
+    @required this.tokenRepository,
     @required this.authenticationBloc,
-  })  : assert(userRepository != null),
+  })  : assert(tokenRepository != null),
         assert(authenticationBloc != null),
         super(LoginInitial());
 
@@ -31,7 +31,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginLoading();
 
       try {
-        final token = await userRepository.authenticate(
+        final token = await tokenRepository.authenticate(
           username: event.username,
           password: event.password,
         );
