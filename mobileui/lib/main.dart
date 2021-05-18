@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileui/config/app_config.dart';
-import 'package:mobileui/users/user_bloc.dart';
+import 'package:mobileui/users/user_list/user_list_bloc.dart';
 import 'package:mobileui/users/user_repository.dart';
 import 'auth/token_repository.dart';
 
@@ -66,14 +66,14 @@ class _AppState extends State<App> {
   AuthenticationBloc authenticationBloc;
   TokenRepository get tokenRepository => widget.tokenRepository;
   UserRepository userRepository;
-  UserBloc userBloc;
+  UserListBloc userListBloc;
 
   @override
   void initState() {
     authenticationBloc = AuthenticationBloc(tokenRepository: tokenRepository);
     authenticationBloc.add(AppStarted());
     userRepository = new UserRepository(config: widget.config, tokenRepository: tokenRepository);
-    userBloc = new UserBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: widget.config, context: context);
+    userListBloc = new UserListBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: widget.config, context: context);
     super.initState();
   }
 
@@ -89,7 +89,7 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(create: (_) => authenticationBloc),
-        BlocProvider<UserBloc>(create: (_) => userBloc)
+        BlocProvider<UserListBloc>(create: (_) => userListBloc)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

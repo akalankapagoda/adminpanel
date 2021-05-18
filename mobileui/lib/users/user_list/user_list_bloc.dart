@@ -6,20 +6,20 @@ import 'package:bloc/bloc.dart';
 
 import 'package:mobileui/auth/token_repository.dart';
 import 'package:mobileui/config/app_config.dart';
-import 'package:mobileui/users/user_event.dart';
 import 'package:mobileui/users/user_list/user_list_event.dart';
+import 'package:mobileui/users/user_list/user_list_page.dart';
 import 'package:mobileui/users/user_repository.dart';
 import 'package:mobileui/users/user_list/user_list_state.dart';
-import 'package:mobileui/users/user_state.dart';
+import 'package:mobileui/model/user.dart';
 
-class UserBloc extends Bloc<UserEvent, UserState> {
+class UserListBloc extends Bloc<UserListEvent, UserListState> {
   final TokenRepository tokenRepository;
   final AppConfig config;
   final UserRepository userRepository;
   final BuildContext context;
 
 
-  UserBloc({
+  UserListBloc({
     @required this.tokenRepository,
     @required this.userRepository,
     @required this.config,
@@ -28,25 +28,29 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         assert(userRepository != null),
         assert(config != null),
         assert(context != null),
-        super(UserInitial());
+        super(UserListInitial());
 
   @override
-  UserState get initialState => UserInitial();
+  UserListState get initialState => UserListInitial();
 
   @override
-  Stream<UserState> mapEventToState(
-      UserEvent event,
+  Stream<UserListState> mapEventToState(
+      UserListEvent event,
       ) async* {
-    if (event is UpdateUserPressed) {
+    if (event is LoadUserListPressed) {
+      yield UserListLoading();
 
-      UpdateUserPressed updateEvent = event as UpdateUserPressed;
+      try {
+        LoadUserListPressed loadUserListPressed = event as LoadUserListPressed;
+        List<User> users = await userRepository.getUsersList(filter: loadUserListPressed.filter);
 
-      yield UserSaveInProgress(updateEvent.user);
+        yield UserListLoaded(users);
 
-      // List<User> users = await userRepository.getUsersList(filter: loadUserListPressed.filter);
-
-      yield UserSaveCompleted(updateEvent.user);
+      } catch (error) {
+        yield UserLoadingFailure(error: error.toString());
+      }
+    } else if (event is UserListInit) {
+      yield UserListInitial();
     }
-
   }
 }

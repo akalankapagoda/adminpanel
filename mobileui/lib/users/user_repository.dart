@@ -44,4 +44,37 @@ class UserRepository {
       throw Exception('Auth Failed');
     }
   }
+
+  Future<List<User>> updateUser({User user}) async {
+
+    if (!tokenRepository.hasToken()) {
+      throw Exception('Not Authorised');
+    }
+
+    var queryParameters = {
+      // 'filter': filter
+    };
+
+    http.Response response = await http.get(
+        Uri.http(config.apiBaseUrl, config.usersPath + config.listPath, queryParameters),
+
+        headers: <String, String>{
+          'Authorization': 'Bearer ' + tokenRepository.getToken()
+        });
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then it is the JWT.
+
+      var data =  json.decode(response.body) as List;
+
+      var users = data.map<User>((json) => User.fromJson(json)).toList();
+      return users;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Auth Failed');
+    }
+  }
+
 }

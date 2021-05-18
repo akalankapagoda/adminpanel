@@ -6,8 +6,8 @@ import 'package:mobileui/auth/authentication_event.dart';
 import 'package:mobileui/auth/token_repository.dart';
 import 'package:mobileui/config/app_config.dart';
 import 'package:mobileui/login/logout_button.dart';
-import 'package:mobileui/users/user_bloc.dart';
-import 'package:mobileui/users/user_page.dart';
+import 'package:mobileui/users/user_list/user_list_bloc.dart';
+import 'package:mobileui/users/user_list/user_list_page.dart';
 import 'package:mobileui/users/user_repository.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,8 +21,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final UserBloc userBloc =
-    BlocProvider.of<UserBloc>(context);
+    final UserListBloc userListBloc =
+    BlocProvider.of<UserListBloc>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('Home'), actions: <Widget>[
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                       return UsersPage(config: config,
                           tokenRepository: tokenRepository,
                           userRepository: userRepository,
-                          userBloc: userBloc);
+                          userListBloc: userListBloc);
                     }),
                   );
 

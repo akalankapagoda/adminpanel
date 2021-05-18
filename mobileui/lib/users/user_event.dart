@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mobileui/model/user.dart';
@@ -9,24 +10,21 @@ abstract class UserEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadUserListPressed extends UserEvent {
-  final String filter;
+class SaveUserPressed extends UserEvent {
+  final User user;
 
-  const LoadUserListPressed({@required this.filter});
-
-  @override
-  List<Object> get props => [filter];
-}
-
-class UserListLoaded extends UserEvent {
-  final List<User> users;
-
-  const UserListLoaded({@required this.users});
+  const SaveUserPressed({@required this.user});
 
   @override
-  List<Object> get props => [users];
+  List<Object> get props => [user];
 }
 
-class LoadUserPressed extends UserEvent {
-  const LoadUserPressed();
+class UpdateUserPressed extends UserEvent {
+  final User user;
+  final BuildContext context;
+
+  const UpdateUserPressed({@required this.context, @required this.user});
+
+  @override
+  List<Object> get props => [context, user];
 }

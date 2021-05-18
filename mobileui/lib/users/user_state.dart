@@ -11,27 +11,20 @@ abstract class UserState extends Equatable {
 
 class UserInitial extends UserState {}
 
-class UserListLoading extends UserState {}
+class UserSaveInProgress extends UserState {
+  final User user;
 
-class UserLoading extends UserState {}
-
-class UserList extends UserState {
-  final List<User> users;
-
-  UserList(this.users);
+  UserSaveInProgress(this.user);
 
   @override
-  List<Object> get props => [users];
+  List<Object> get props => [user];
 }
 
-class UserLoadingFailure extends UserState {
-  final String error;
+class UserSaveCompleted extends UserState {
+  final User user;
 
-  const UserLoadingFailure({@required this.error});
-
-  @override
-  List<Object> get props => [error];
+  UserSaveCompleted(this.user);
 
   @override
-  String toString() => 'Failed to load user(s) { error: $error }';
+  List<Object> get props => [user];
 }
