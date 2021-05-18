@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileui/config/app_config.dart';
+import 'package:mobileui/users/user_bloc.dart';
+import 'package:mobileui/users/user_repository.dart';
 import 'auth/token_repository.dart';
 
 import 'auth/authentication_bloc.dart';
@@ -63,11 +65,15 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   AuthenticationBloc authenticationBloc;
   TokenRepository get tokenRepository => widget.tokenRepository;
+  UserRepository userRepository;
+  UserBloc userBloc;
 
   @override
   void initState() {
     authenticationBloc = AuthenticationBloc(tokenRepository: tokenRepository);
     authenticationBloc.add(AppStarted());
+    userRepository = new UserRepository(config: widget.config, tokenRepository: tokenRepository);
+    userBloc = new UserBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: widget.config, context: context);
     super.initState();
   }
 
@@ -79,20 +85,25 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthenticationBloc>(create: (_) => authenticationBloc)
+        BlocProvider<AuthenticationBloc>(create: (_) => authenticationBloc),
+        BlocProvider<UserBloc>(create: (_) => userBloc)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           bloc: authenticationBloc,
           builder: (BuildContext context, AuthenticationState state) {
+
+            authenticationBloc.context = context; // Set context to help with navigation
+
             if (state is AuthenticationUninitialized) {
               return SplashPage();
             }
             if (state is AuthenticationAuthenticated) {
-              return HomePage(config: widget.config, tokenRepository: widget.tokenRepository);
+              return HomePage(config: widget.config, tokenRepository: widget.tokenRepository, userRepository: userRepository,);
             }
             if (state is AuthenticationUnauthenticated) {
               return LoginPage(tokenRepository: tokenRepository);

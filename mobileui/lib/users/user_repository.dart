@@ -19,8 +19,12 @@ class UserRepository {
       throw Exception('Not Authorised');
     }
 
+    var queryParameters = {
+      'filter': filter
+    };
+
     http.Response response = await http.get(
-        Uri.http(config.apiBaseUrl, config.usersPath + config.listPath),
+        Uri.http(config.apiBaseUrl, config.usersPath + config.listPath, queryParameters),
 
         headers: <String, String>{
           'Authorization': 'Bearer ' + tokenRepository.getToken()

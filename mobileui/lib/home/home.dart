@@ -6,6 +6,7 @@ import 'package:mobileui/auth/authentication_event.dart';
 import 'package:mobileui/auth/token_repository.dart';
 import 'package:mobileui/config/app_config.dart';
 import 'package:mobileui/login/logout_button.dart';
+import 'package:mobileui/users/user_bloc.dart';
 import 'package:mobileui/users/user_page.dart';
 import 'package:mobileui/users/user_repository.dart';
 
@@ -13,13 +14,15 @@ class HomePage extends StatelessWidget {
 
   AppConfig config;
   TokenRepository tokenRepository;
+  UserRepository userRepository;
 
-  HomePage({@required this.config, @required this.tokenRepository});
+  HomePage({@required this.config, @required this.tokenRepository, @required this.userRepository});
 
   @override
   Widget build(BuildContext context) {
-    final AuthenticationBloc authenticationBloc =
-        BlocProvider.of<AuthenticationBloc>(context);
+
+    final UserBloc userBloc =
+    BlocProvider.of<UserBloc>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('Home'), actions: <Widget>[
@@ -58,20 +61,16 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Text('Users', style: TextStyle(fontSize: 35)),
                 onPressed: () {
-                  final UserRepository userRepository = new UserRepository(config: config, tokenRepository: tokenRepository);
 
-                  userRepository.getUsersList().
-                  then((users) => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return UsersPage(config: config,
-                            tokenRepository: tokenRepository,
-                            userRepository: userRepository,
-                            users: users);
-                      }),
-                    )
-                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return UsersPage(config: config,
+                          tokenRepository: tokenRepository,
+                          userRepository: userRepository,
+                          userBloc: userBloc);
+                    }),
+                  );
 
 
                 },
