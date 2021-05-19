@@ -3,6 +3,58 @@
 
 A sample admin panel application with server and a mobile ui client.
 
+## Entity Model
+
+The model consists of the following entities with simple connections between each other.
+![Admin Panel Entity Model](https://github.com/akalankapagoda/adminpanel/blob/master/AdminPanelEntityModel.png?raw=true)
+
+The entities are converted into JSON objects as follows for carrying them between the server and client.
+
+### User
+
+    {
+		"id": ,
+		"username": "",
+		"name": "",
+		"email": "",
+		"salt": "",
+	}
+
+### Course
+    {
+        "id": ,
+        "name": "",
+        "description": "",
+        "credits": ,
+        "created_by": ,
+        "questions": {} // JSON structure undefined
+    }
+
+### Role
+    {
+        "id": ,
+        "name": "",
+        "description": ""
+    }
+
+### Privilege
+    {
+        "id": ,
+        "name": "",
+        "description": ""
+    }
+
+### Role_Privilege
+    {
+        "role_id": ,
+        "privilege_id": 
+    }
+
+### User_Role
+	{
+	    "user_id": ,
+	    "role_id": 
+	}
 
 ## Server
 
@@ -26,6 +78,10 @@ The Server is build using NodeJs.
   It should return `Server is healthy and running`
 
 ### API Reference
+
+The API is protected by credentials and either of Basic Auth or a JWT can be used to authorise a request.
+
+In case a JWT is required, a request should be sent to the login endpoint first to obtain a JWT.
 
 #### Login Endpoint
 
