@@ -4,19 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobileui/config/app_config.dart';
 
+/// Handle saving, retrieving and clearing of the authentication token
 class TokenRepository {
-
   AppConfig config;
 
   TokenRepository({@required this.config});
 
   String token;
 
+  /// Parse credentials to the server and grab a token
   Future<String> authenticate({
     @required String username,
     @required String password,
   }) async {
-
     String credentials = username + ":" + password;
     Codec<String, String> stringToBase64 = utf8.fuse(base64);
     String encodedAuth = stringToBase64.encode(credentials);

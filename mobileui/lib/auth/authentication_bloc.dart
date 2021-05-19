@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
-import 'package:mobileui/login/login_page.dart';
 import 'token_repository.dart';
 import 'authentication_event.dart';
 import 'authentication_state.dart';
 
+/// Handle auth related event streams
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final TokenRepository tokenRepository;
@@ -22,8 +22,8 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
-
     if (event is AppStarted) {
+      // Check if auth token is set
       final bool hasToken = await tokenRepository.hasToken();
 
       if (hasToken) {
@@ -34,27 +34,20 @@ class AuthenticationBloc
     }
 
     if (event is LoggedIn) {
+      // Save auth token
       yield AuthenticationLoading();
       await tokenRepository.persistToken(event.token);
       yield AuthenticationAuthenticated();
     }
 
     if (event is LoggedOut) {
+      // Remove auth token and drop to login screen
       yield AuthenticationLoading();
       await tokenRepository.deleteToken();
 
-      Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+      Navigator.popUntil(
+          context, ModalRoute.withName(Navigator.defaultRouteName));
 
-      // Navigator.of(context).popUntil((route) => route.isFirst);
-
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) {
-      //     return LoginPage(tokenRepository: tokenRepository);
-      //   }),
-      // );
-      
-      
       yield AuthenticationUnauthenticated();
     }
   }

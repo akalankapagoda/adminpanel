@@ -1,16 +1,16 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileui/auth/authentication_bloc.dart';
 import 'package:mobileui/auth/authentication_event.dart';
 
+/// A common logout button to handle logout event
+/// which can be used across the app
 class LogoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final AuthenticationBloc authenticationBloc =
-    BlocProvider.of<AuthenticationBloc>(context);
+        BlocProvider.of<AuthenticationBloc>(context);
 
     return Padding(
       padding: EdgeInsets.only(right: 20.0),
@@ -28,5 +28,4 @@ class LogoutButton extends StatelessWidget {
       ),
     );
   }
-
 }

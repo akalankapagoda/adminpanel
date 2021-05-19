@@ -86,4 +86,29 @@ class UserRepository {
       throw Exception('User insert failed : ' + errorResponse.message);
     }
   }
+
+  Future<Object> deleteUser({User user}) async {
+    if (!tokenRepository.hasToken()) {
+      throw Exception('Not Authorised');
+    }
+
+    http.Response response = await http.delete(
+        Uri.http(config.apiBaseUrl, config.usersPath),
+        headers: <String, String>{
+          'Authorization': 'Bearer ' + tokenRepository.getToken()
+        },
+        body: {
+          "id": user.id.toString()
+        });
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+
+      var errorResponse = json.decode(response.body);
+      throw Exception('User insert failed : ' + errorResponse.message);
+    }
+  }
 }

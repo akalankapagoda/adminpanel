@@ -13,6 +13,7 @@ import 'package:mobileui/users/user_list/user_list_event.dart';
 import 'package:mobileui/users/user_repository.dart';
 import 'package:mobileui/users/user_list/user_list_state.dart';
 
+/// UI Page for showing list of users
 class UsersPage extends StatelessWidget {
   final AppConfig config;
   final TokenRepository tokenRepository;
@@ -25,14 +26,10 @@ class UsersPage extends StatelessWidget {
       {@required this.config,
       @required this.tokenRepository,
       @required this.userRepository,
-      @required this.userListBloc}) {
-
-
-  }
+      @required this.userListBloc}) {}
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<UserListBloc, UserListState>(
       bloc: userListBloc,
       builder: (
@@ -44,13 +41,9 @@ class UsersPage extends StatelessWidget {
           userListBloc.add(new LoadUserListPressed(filter: null));
 
           return LoadingScreen('User');
-
         } else if (state is UserListLoading) {
-
           return LoadingScreen('User');
-
         } else if (state is UserListLoaded) {
-
           return getUserListScreen(context, state.users);
         } else {
           return Text("Error");
@@ -60,7 +53,6 @@ class UsersPage extends StatelessWidget {
   }
 
   Widget getUserListScreen(BuildContext context, List<User> users) {
-
     var names = [for (var user in users) user.name];
     var emails = [for (var user in users) user.email];
 
@@ -74,7 +66,14 @@ class UsersPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) {
-                return new UserEditPage(userBloc: new UserBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: config, context: context), userListBloc: userListBloc,);
+                return new UserEditPage(
+                  userBloc: new UserBloc(
+                      tokenRepository: tokenRepository,
+                      userRepository: userRepository,
+                      config: config,
+                      context: context),
+                  userListBloc: userListBloc,
+                );
               }),
             );
           },
@@ -90,18 +89,15 @@ class UsersPage extends StatelessWidget {
                       border: Border.all(
                         color: Colors.teal,
                       ),
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(20))),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   width: MediaQuery.of(context).size.width / 10 * 9,
                   child: Row(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(
-                            left: 20.0, right: 20.0),
+                        margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                         width: MediaQuery.of(context).size.width / 10 * 6,
                         child: TextFormField(
-                          decoration:
-                          InputDecoration(labelText: 'search'),
+                          decoration: InputDecoration(labelText: 'search'),
                           controller: searchController,
                         ),
                       ),
@@ -109,8 +105,7 @@ class UsersPage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             shape: CircleBorder(), primary: Colors.teal),
                         child: Container(
-                          decoration:
-                          BoxDecoration(shape: BoxShape.circle),
+                          decoration: BoxDecoration(shape: BoxShape.circle),
                           child: Icon(Icons.search),
                         ),
                         onPressed: () => {
@@ -118,28 +113,30 @@ class UsersPage extends StatelessWidget {
                               filter: searchController.text))
                         },
                       ),
-                      // Container(
-                      //     child: Icon(Icons.search)
-                      // ),
                     ],
                   )),
               Container(
-                  height: MediaQuery. of(context). size. height / 10 * 8,
+                  height: MediaQuery.of(context).size.height / 10 * 6,
                   padding: EdgeInsets.all(10),
                   child: ListView.separated(
-                      separatorBuilder:
-                          (BuildContext context, int index) =>
-                      const Divider(),
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const Divider(),
                       itemCount: names.length,
                       itemBuilder: (context, index) {
                         return Card(
                             child: ListTile(
                                 onTap: () {
-
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) {
-                                      return new UserEditPage(user: users[index], userBloc: new UserBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: config, context: context), userListBloc: userListBloc);
+                                      return new UserEditPage(
+                                          user: users[index],
+                                          userBloc: new UserBloc(
+                                              tokenRepository: tokenRepository,
+                                              userRepository: userRepository,
+                                              config: config,
+                                              context: context),
+                                          userListBloc: userListBloc);
                                     }),
                                   );
                                 },

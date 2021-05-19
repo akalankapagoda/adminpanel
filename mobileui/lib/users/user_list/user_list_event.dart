@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mobileui/model/user.dart';
 
 abstract class UserListEvent extends Equatable {
   const UserListEvent();
@@ -20,6 +19,5 @@ class LoadUserListPressed extends UserListEvent {
 }
 
 class UserListInit extends UserListEvent {
-
   const UserListInit();
 }

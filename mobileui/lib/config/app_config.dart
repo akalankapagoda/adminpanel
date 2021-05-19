@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
+/// Load app configs related to server endpoints
+/// from an environment specific json
 class AppConfig {
   final String apiBaseUrl;
 

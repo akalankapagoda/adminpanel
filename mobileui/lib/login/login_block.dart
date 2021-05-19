@@ -9,6 +9,7 @@ import 'package:mobileui/auth/token_repository.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
+/// Handles login events related stream
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final TokenRepository tokenRepository;
   final AuthenticationBloc authenticationBloc;
@@ -25,8 +26,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(
-      LoginEvent event,
-      ) async* {
+    LoginEvent event,
+  ) async* {
     if (event is LoginButtonPressed) {
       yield LoginLoading();
 

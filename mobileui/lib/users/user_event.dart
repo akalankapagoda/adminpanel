@@ -21,10 +21,18 @@ class SaveUserPressed extends UserEvent {
 
 class UpdateUserPressed extends UserEvent {
   final User user;
-  final BuildContext context;
 
-  const UpdateUserPressed({@required this.context, @required this.user});
+  const UpdateUserPressed({@required this.user});
 
   @override
-  List<Object> get props => [context, user];
+  List<Object> get props => [user];
+}
+
+class DeleteUserPressed extends UserEvent {
+  final User user;
+
+  const DeleteUserPressed({@required this.user});
+
+  @override
+  List<Object> get props => [user];
 }

@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
+/// User entity
 class User {
   final int id;
   String username;
@@ -14,6 +13,7 @@ class User {
     this.email,
   });
 
+  /// Convert a json to a User object
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
@@ -23,13 +23,14 @@ class User {
     );
   }
 
+  /// Convert a user object to a JSON
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id.toString(),
       'username': username,
       'name': name,
       'email': email,
-      'password' : password
+      'password': password
     }..removeWhere(
         (dynamic key, dynamic value) => key == null || value == null);
   }

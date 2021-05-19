@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
+/// Auth events
 abstract class AuthenticationEvent extends Equatable {
-
   AuthenticationEvent([List props = const []]) : super();
 
   @override

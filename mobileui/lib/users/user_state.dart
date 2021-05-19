@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mobileui/model/user.dart';
 
@@ -11,10 +10,10 @@ abstract class UserState extends Equatable {
 
 class UserInitial extends UserState {}
 
-class UserSaveInProgress extends UserState {
+class UserOperationInProgress extends UserState {
   final User user;
 
-  UserSaveInProgress(this.user);
+  UserOperationInProgress(this.user);
 
   @override
   List<Object> get props => [user];
@@ -24,6 +23,15 @@ class UserSaveCompleted extends UserState {
   final User user;
 
   UserSaveCompleted(this.user);
+
+  @override
+  List<Object> get props => [user];
+}
+
+class UserDeleteCompleted extends UserState {
+  final User user;
+
+  UserDeleteCompleted(this.user);
 
   @override
   List<Object> get props => [user];
