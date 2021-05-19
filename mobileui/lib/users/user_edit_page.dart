@@ -37,6 +37,7 @@ class UserEditPage extends StatelessWidget {
     if (user == null) {
       this.newUser = true;
       this.title = 'New User';
+      this.user = new User();
     } else {
       this.newUser = false;
       this.title = user.name;
@@ -229,6 +230,12 @@ Widget getSaveSuccessScreen(BuildContext context, String name) {
                 ) : Container(),
                 ElevatedButton(
                   onPressed:() {
+
+                    user.name = nameController.text;
+                    user.username = usernameController.text;
+                    user.email = emailController.text;
+                    user.password = passwordController.text;
+
                     if (newUser) {
                       userBloc.add(SaveUserPressed(user: user));
                     } else {

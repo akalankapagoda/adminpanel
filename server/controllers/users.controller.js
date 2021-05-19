@@ -73,8 +73,6 @@ class UsersController {
         var user = new User(req.body.id, req.body.username, req.body.name, req.body.email);
 
         try {
-            generateUserHash(user, req.body.password);
-
             usersDatabaseHandler.updateUser(user, () => {
                 res.send({success: 'true'});
             }, (error) => handleDatabaseError(error, res));

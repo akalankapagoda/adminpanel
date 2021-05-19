@@ -43,9 +43,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
       yield UserSaveInProgress(updateEvent.user);
 
-      // List<User> users = await userRepository.getUsersList(filter: loadUserListPressed.filter);
+      await userRepository.updateUser(user: updateEvent.user);
 
       yield UserSaveCompleted(updateEvent.user);
+    } else if (event is SaveUserPressed) {
+
+      SaveUserPressed saveEvent = event as SaveUserPressed;
+
+      yield UserSaveInProgress(saveEvent.user);
+
+      await userRepository.addUser(user: saveEvent.user);
+
+      yield UserSaveCompleted(saveEvent.user);
     }
 
   }

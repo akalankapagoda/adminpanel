@@ -33,8 +33,6 @@ class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    UserBloc userBloc = new UserBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: config, context: context);
-
     return BlocBuilder<UserListBloc, UserListState>(
       bloc: userListBloc,
       builder: (
@@ -53,7 +51,7 @@ class UsersPage extends StatelessWidget {
 
         } else if (state is UserListLoaded) {
 
-          return getUserListScreen(context, state.users, userBloc);
+          return getUserListScreen(context, state.users);
         } else {
           return Text("Error");
         }
@@ -61,12 +59,13 @@ class UsersPage extends StatelessWidget {
     );
   }
 
-  Widget getUserListScreen(BuildContext context, List<User> users, UserBloc userBloc) {
+  Widget getUserListScreen(BuildContext context, List<User> users) {
 
     var names = [for (var user in users) user.name];
     var emails = [for (var user in users) user.email];
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(title: Text('Users'), actions: <Widget>[
           LogoutButton(),
         ]),
@@ -75,7 +74,7 @@ class UsersPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) {
-                return new UserEditPage(userBloc: userBloc, userListBloc: userListBloc,);
+                return new UserEditPage(userBloc: new UserBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: config, context: context), userListBloc: userListBloc,);
               }),
             );
           },
@@ -110,9 +109,6 @@ class UsersPage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             shape: CircleBorder(), primary: Colors.teal),
                         child: Container(
-                          // width: 200,
-                          // height: 200,
-                          // alignment: Alignment.center,
                           decoration:
                           BoxDecoration(shape: BoxShape.circle),
                           child: Icon(Icons.search),
@@ -128,7 +124,7 @@ class UsersPage extends StatelessWidget {
                     ],
                   )),
               Container(
-                  height: 200,
+                  height: MediaQuery. of(context). size. height / 10 * 8,
                   padding: EdgeInsets.all(10),
                   child: ListView.separated(
                       separatorBuilder:
@@ -143,7 +139,7 @@ class UsersPage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) {
-                                      return new UserEditPage(user: users[index], userBloc: userBloc, userListBloc: userListBloc);
+                                      return new UserEditPage(user: users[index], userBloc: new UserBloc(tokenRepository: tokenRepository, userRepository: userRepository, config: config, context: context), userListBloc: userListBloc);
                                     }),
                                   );
                                 },

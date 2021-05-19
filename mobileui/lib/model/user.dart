@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 
 class User {
   final int id;
-  final String username;
-  final String name;
+  String username;
+  String name;
   String email;
+  String password;
 
   User({
-    @required this.id,
-    @required this.username,
-    @required this.name,
+    this.id,
+    this.username,
+    this.name,
     this.email,
   });
 
@@ -17,7 +18,19 @@ class User {
     return User(
       id: json['id'],
       name: json['name'],
+      username: json['username'],
       email: json['email'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id.toString(),
+      'username': username,
+      'name': name,
+      'email': email,
+      'password' : password
+    }..removeWhere(
+        (dynamic key, dynamic value) => key == null || value == null);
   }
 }

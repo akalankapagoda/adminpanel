@@ -25,8 +25,8 @@ export function insertUserQuery(user) {
 export function updateUserQuery(user) {
     return {
         name: 'user-update',
-        text: "UPDATE users SET username = $1, name = $2, email = $3, salt = $4, hash = $5 WHERE id = $6",
-        values: [user.username, user.name, user.email, user.salt, user.hash, user.id]
+        text: "UPDATE users SET username = $1, name = $2, email = $3 WHERE id = $4",
+        values: [user.username, user.name, user.email, user.id]
     };
 }
 

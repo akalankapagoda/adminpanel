@@ -42,23 +42,6 @@ class HomePage extends StatelessWidget {
                   shape: const BeveledRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
-                child: Text('Courses', style: TextStyle(fontSize: 35)),
-                onPressed: () {
-
-                },
-              ),
-            ),
-            Spacer(),
-            Container(
-              height: 100,
-              width: 350,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.teal,
-                  onPrimary: Colors.white,
-                  shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                ),
                 child: Text('Users', style: TextStyle(fontSize: 35)),
                 onPressed: () {
 
@@ -77,77 +60,38 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Spacer(),
-            Container(
-              height: 100,
-              width: 350,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.teal,
-                  onPrimary: Colors.white,
-                  shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                ),
-                child: Text('Roles', style: TextStyle(fontSize: 35)),
-                onPressed: () {
-                  // authenticationBloc.add(LoggedOut());
-                },
-              ),
-            ),
+            getDisabledButton('Courses'),
             Spacer(),
-            Container(
-              height: 100,
-              width: 350,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.teal,
-                  onPrimary: Colors.white,
-                  shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                ),
-                child: Text('Privileges', style: TextStyle(fontSize: 35)),
-                onPressed: () {
-                  // authenticationBloc.add(LoggedOut());
-                },
-              ),
-            ),
+            getDisabledButton('Roles'),
             Spacer(),
-            Container(
-              height: 100,
-              width: 350,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.teal,
-                  onPrimary: Colors.white,
-                  shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                ),
-                child: Text('Role Privileges', style: TextStyle(fontSize: 35)),
-                onPressed: () {
-                  // authenticationBloc.add(LoggedOut());
-                },
-              ),
-            ),
+            getDisabledButton('Privileges'),
             Spacer(),
-            Container(
-              height: 100,
-              width: 350,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.teal,
-                  onPrimary: Colors.white,
-                  shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                ),
-                child: Text('User Roles', style: TextStyle(fontSize: 35)),
-                onPressed: () {
-                  // authenticationBloc.add(LoggedOut());
-                },
-              ),
-            ),
+           getDisabledButton('Role Privileges'),
+            Spacer(),
+            getDisabledButton('User Roles'),
             Spacer(),
           ],
         ),
       )
+    );
+  }
+
+  Widget getDisabledButton(String name) {
+    return Container(
+      height: 100,
+      width: 350,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white30,
+          onPrimary: Colors.white,
+          shape: const BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5))),
+        ),
+        child: Text(name, style: TextStyle(fontSize: 35)),
+        onPressed: () {
+
+        },
+      ),
     );
   }
 }
