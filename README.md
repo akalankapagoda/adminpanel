@@ -83,6 +83,11 @@ The API is protected by credentials and either of Basic Auth or a JWT can be use
 
 In case a JWT is required, a request should be sent to the login endpoint first to obtain a JWT.
 
+
+*** A comprehensive sample Postman request collection is available [here](https://github.com/akalankapagoda/adminpanel/blob/master/Server.postman_collection.json)
+
+
+
 #### Login Endpoint
 
 **Request**
