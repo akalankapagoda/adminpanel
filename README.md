@@ -155,3 +155,90 @@ A JWT Token
 | List UserRoles| GET| /userRoles/list | filter | | List of UserRole|
 | Create UserRole| POST| /userRoles| | Course UserRole| HTTP SC 200 |
 | Delete UserRole| DELETE| /userRoles| | id | HTTP SC 200 |
+
+### ​Further Improvements
+
+1.  Input validations and sanitizing  
+      
+    The input values are not currently properly validated and needs improvements. Also, since this is dealing with databases, it is vital to sanitize the inputs to avoid attacks like SQL injection.  
+    
+2.  Response Error Handling  
+    At the moment, if any invalid parameter is provided to the input a generic error or an empty response will be received. Instead a meaning message should be returned in each cases with a valid status code depending on whether it’s an error in the request or whether it’s error in the server.  
+      
+    If it’s an error in the request usually a 4XX status code will be returned.  
+    If it’s a server error, a 5XX status code will be returned.  
+    
+3.  Introducing a password policy for users and change password / forgot password functionality.  
+      
+    So that the passwords they use are not easily guessable and not prone to brute force attacks.  
+    
+4.  Introducing an object relational model.  
+      
+    Nodejs has a nice object relational model library for MongoDB namedMongoose. We need to introduce a similar layer here to convert DB layer elements to objects. They can also be used in the service layer.  
+    
+5.  Supporting different types of questions and improve question schema model.  
+      
+    Currently only multiple choice questions are supported. Instead, should associate a question type with each question to determine different behaviour depending on the types of questions. Along with this, the questions should be mapped into a proper schema model.  
+    
+6.  Modify populating initial data to be done using a file import.  
+      
+    The initial data is included in an sql script. Instead, it should facilitate to import the initial configurations for the system using an external entity such as a CSV or an admin panel option.  
+    
+7.  Improve unit tests.  
+      
+    Currently only some of the functionality is covered by unit tests. Need to cover everything.  
+    Also, currently on some cases, if the unit test fails in the middle due to an error, it will leave behind some test data in the database. Instead, should use ‘setUp’ and ‘cleanUp’ methods approach to clear out test data even in an error scenarios before completing the unit tests.
+
+## MobileUI
+
+A Sample Mobile UI is available which is built using Flutter to connect to the server and manage admin functions.
+
+The UI uses [Block State Management Library](https://bloclibrary.dev/#/) to manage UI states.
+
+## ​Prerequisites
+
+1.  You need to have [Flutter](https://flutter.dev/docs/get-started/install) installed.
+    
+2.  You need to have [AndroidStudio](https://developer.android.com/studio) installed with Flutter plugin support.
+
+## ​How-to Run
+
+1.  Clone [this](https://github.com/akalankapagoda/adminpanel) github repository if it’s not already cloned.
+    
+2.  Open AndroidStudio and open the ‘mobileui’ folder as a Flutter application.
+    
+3.  Open ‘assets/config/dev.json’ file and update the IP with the IP/Hostname of the server.  
+    {  
+    "apiBaseUrl": "<IP/Hostname>:<Port>"  
+    }
+
+4.  Start an Android emulator.
+    
+5.  Run the application as an Android project in the Android emulator.
+    
+### Mobile UI Functions
+
+The Mobile UI facilitates following functionality at the moment.
+
+ - Login
+ - List Users
+ - Filter Users by Name
+ - View a User
+ - Edit a User
+ - Add a User
+ - Delete a User
+	
+A screencast is available [here](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%202021-05-19%2020-47-40.mp4?raw=true)
+
+![Login](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_39_34.png?raw=true)
+  ![Home](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_50_44.png?raw=true)
+  ![List Users](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_50_54.png?raw=true)
+![Filter Users](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_51_02.png?raw=true)
+![Edit User](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_51_17.png?raw=true)
+![Add User](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_51_45.png?raw=true)
+
+### ​Further Improvements
+
+1.  The server is hosted locally and the mobile client connects to the server using ‘http’ protocol which is not secure. Should modify the client to change the protocol depending on the dev/prod environment variable.
+2. Currently only User related functionality is supported. Need to support managing all other entities.
+3. The User privileges are not considered at the moment and any user can edit any entity. Instead, this should be governed by user privileges.
