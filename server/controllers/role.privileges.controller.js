@@ -25,8 +25,7 @@ class RolePrivilegesController {
 
 
     }
-
-    // 
+    
     /**
      * Retrieve and return all Role_Privileges from the database filtered by the role_id if provided in the request.
      * 

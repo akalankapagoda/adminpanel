@@ -1,6 +1,4 @@
-/**
- * Configures services routes for this application.
- */
+// Configures services routes for this application.
 
 import coursesController from '../controllers/courses.controller.js';
 import usersController from '../controllers/users.controller.js';
@@ -21,6 +19,11 @@ const loginPath = '/login';
 
 const listPath = '/list';
 
+/**
+ * Attach relevant routes to the service application.
+ * 
+ * @param {*} app The service application to attach the routes to
+ */
 export function initRoutes(app) {
 
     // Courses

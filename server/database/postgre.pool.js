@@ -1,11 +1,18 @@
 import Pg from 'pg';
+import dotenv from 'dotenv';
 
+// Load configurations
+const result = dotenv.config();
+
+/**
+ * Returns a postgre connection pool.
+ */
 const pool = new Pg.Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'carna_akalanka',
-  password: 'root',
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
 });
 
 export default pool;

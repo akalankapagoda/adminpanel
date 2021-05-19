@@ -1,9 +1,11 @@
+// Contains prepared queries to handle role_privilege entity
+
 /**
- * List role_privileges.
+ * Returns a prepared query to list role_privileges.
  * 
  * @param {*} roleId RoleId to filter by
  * 
- * @returns Role_privleges filter by the role Id or unfiltered if the roleId provided is empty
+ * @returns A prepared query to list role_privileges with the filter if provided or without the where close if it's not provided
  */
 export function listRolePrivilegesQuery(role_id) {
 
@@ -22,6 +24,13 @@ export function listRolePrivilegesQuery(role_id) {
 
 };
 
+/**
+ * Returns a prepared query to insert role_privileges.
+ * 
+ * @param {*} role_id 
+ * @param {*} privilege_id 
+ * @returns A prepared query to insert role_privileges
+ */
 export function insertRolePrivilegesQuery(role_id, privilege_id) {
     return {
         name: 'role.privileges-insert',
@@ -30,6 +39,15 @@ export function insertRolePrivilegesQuery(role_id, privilege_id) {
     };
 }
 
+/**
+ * Returns a prepared query to delete role_privileges.
+ * 
+ * @param {*} role_id Role id of the role_privilege to delete
+ * @param {*} privilege_id Privilege id of the role_privilege to delete
+ * 
+ * @returns A
+ *  prepared query to delete role_privileges
+ */
 export function deleteRolePrivilegeQuery(role_id, privilege_id) {
     return {
         name: 'role.privileges-delete',

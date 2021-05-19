@@ -1,13 +1,17 @@
-/**
- * Handles CRUD operations for Privileges.
- */
-
 import privilegesDatabaseHandler from '../database/privileges.database.js';
 import Privilege from '../model/privilege.js';
 import {handleDatabaseError, handleGenericError} from '../error/error.handler.js';
 
+/**
+ * Handles CRUD operations for Privileges.
+ */
 class PrivilegesController {
-    // Create and Save a new Privileges
+
+    /**
+     * Create and Save a new Privileges
+     * @param {*} req 
+     * @param {*} res 
+     */
     create = (req, res) => {
 
         var privilege = new Privilege(null, req.body.name, req.body.description);
@@ -23,7 +27,11 @@ class PrivilegesController {
 
     }
 
-    // Retrieve and return all Privileges from the database.
+    /**
+     * Retrieve and return all Privileges from the database.
+     * @param {*} req 
+     * @param {*} res 
+     */
     findAll =  (req, res) => {
 
         var filter = req.query.filter;
@@ -43,7 +51,12 @@ class PrivilegesController {
 
     }
 
-    // Find a single Privilege with a Id
+    /**
+     * Find a single Privilege with a Id
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     findOne =  (req, res) => {
         var id = req.query.id;
 
@@ -64,7 +77,12 @@ class PrivilegesController {
 
     }
 
-    // Update a pririlege identified by the privilege Id in the request
+    /**
+     * Update a pririlege identified by the privilege Id in the request
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     update = (req, res) => {
 
         var privilege = new Privilege(req.body.id, req.body.name, req.body.description);
@@ -80,7 +98,12 @@ class PrivilegesController {
 
     }
 
-    // Delete a pririlege with the specified privilege id in the request
+    /**
+     * Delete a pririlege with the specified privilege id in the request
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     remove =  (req, res) => {
 
         try {

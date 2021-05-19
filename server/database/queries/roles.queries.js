@@ -1,3 +1,11 @@
+// Contains prepared queries to handle role entity
+
+/**
+ * Returns a prepared query to list roles.
+ * 
+ * @param {*} filter Filter text to filter the roles by name
+ * @returns 
+ */
 export function listRolesQuery(filter) {
     return {
         name: 'role-list',
@@ -6,6 +14,12 @@ export function listRolesQuery(filter) {
     };
 };
 
+/**
+ * Returns a prepared query to retrieve a role.
+ * 
+ * @param {*} id Role id to retrieve
+ * @returns A prepared query to retrieve a role
+ */
 export function getRoleQuery(id) {
     return {
         name: 'role-get',
@@ -14,6 +28,12 @@ export function getRoleQuery(id) {
     };
 };
 
+/**
+ * Returns a prepared query to insert a role.
+ * 
+ * @param {*} role Role object o insert
+ * @returns A prepared query to insert a role
+ */
 export function insertRoleQuery(role) {
     return {
         name: 'role-insert',
@@ -22,6 +42,12 @@ export function insertRoleQuery(role) {
     };
 }
 
+/**
+ * Returns a prepared query to update a role.
+ * 
+ * @param {*} role Updated role object
+ * @returns A prepared query to update a role
+ */
 export function updateRoleQuery(role) {
     return {
         name: 'role-update',
@@ -30,6 +56,12 @@ export function updateRoleQuery(role) {
     };
 }
 
+/**
+ * Returns a prepared query to delete a role.
+ * 
+ * @param {*} id The role id to delete
+ * @returns A prepared query to delete a role
+ */
 export function deleteRoleQuery(id) {
     return {
         name: 'role-delete',

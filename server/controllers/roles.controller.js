@@ -7,7 +7,13 @@ import Role from '../model/role.js';
 import {handleDatabaseError, handleGenericError} from '../error/error.handler.js';
 
 class UsersController {
-    // Create and Save a new Users
+
+    /**
+     * Create and Save a new Users
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     create = (req, res) => {
 
         var role = new Role(null, req.body.name, req.body.description);
@@ -23,7 +29,12 @@ class UsersController {
 
     }
 
-    // Retrieve and return all Roles from the database.
+    /**
+     * Retrieve and return all Roles from the database.
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     findAll =  (req, res) => {
 
         var filter = req.query.filter;
@@ -43,7 +54,12 @@ class UsersController {
 
     }
 
-    // Find a single Role with a Id
+    /**
+     * Find a single Role with a Id
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     findOne =  (req, res) => {
         var id = req.query.id;
 

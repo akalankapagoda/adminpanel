@@ -1,17 +1,22 @@
+import coursesDatabaseHandler from '../database/courses.database.js';
+import Course from '../model/course.js';
+import { handleDatabaseError, handleGenericError } from '../error/error.handler.js';
+
 /**
  * Handles CRUD operations for Courses.
  */
- import coursesDatabaseHandler from '../database/courses.database.js';
- import Course from '../model/course.js';
- import {handleDatabaseError, handleGenericError} from '../error/error.handler.js';
-
 class CoursesController {
 
-        // Create and Save a new Course
+    /**
+     * Create a new course object and save in the DB.
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     create = (req, res) => {
 
         var userId;
-        
+
         if (req.user) {
             userId = req.user.id;
         } else {
@@ -22,7 +27,7 @@ class CoursesController {
 
         try {
             coursesDatabaseHandler.insertCourse(course, () => {
-                res.send({success: 'true'});
+                res.send({ success: 'true' });
             }, (error) => handleDatabaseError(error, res));
         } catch (e) {
             handleGenericError(e, res);
@@ -30,14 +35,19 @@ class CoursesController {
 
     };
 
-    // Retrieve and return all Courses from the database.
+    /**
+     * Retrieve and return all Courses from the database filtered by the provided name or unfiltered if it's null.
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     findAll = (req, res) => {
         var filter = req.query.filter;
 
         if (!filter) {
             filter = '';
         }
-        
+
         try {
             coursesDatabaseHandler.getCourses(filter, (rows) => {
                 res.send(rows);
@@ -48,12 +58,17 @@ class CoursesController {
 
     };
 
-    // Find a single course with a courseId
+    /**
+     * Find a single course with a courseId
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     findOne = (req, res) => {
         var id = req.query.id;
 
         if (!id) {
-            res.send({error: 'id not provided'});
+            res.send({ error: 'id not provided' });
         } else {
 
             try {
@@ -68,7 +83,12 @@ class CoursesController {
         }
     };
 
-    // Update a course identified by the courseId in the request
+    /**
+     * Update a course identified by the courseId in the request
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     update = (req, res) => {
 
         if (req.user) {
@@ -81,7 +101,7 @@ class CoursesController {
 
         try {
             coursesDatabaseHandler.updateCourse(course, () => {
-                res.send({success: 'true'});
+                res.send({ success: 'true' });
             }, (error) => handleDatabaseError(error, res));
         } catch (e) {
             handleGenericError(e, res);
@@ -89,12 +109,17 @@ class CoursesController {
 
     };
 
-    // Delete a course with the specified courseId in the request
+    /**
+     *  Delete a course with the specified courseId in the request
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     remove = (req, res) => {
 
         try {
             coursesDatabaseHandler.deleteCourse(req.body.id, () => {
-                res.send({success: 'true'});
+                res.send({ success: 'true' });
             }, (error) => handleDatabaseError(error, res));
         } catch (e) {
             handleGenericError(e, res);

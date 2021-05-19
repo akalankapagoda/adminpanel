@@ -2,12 +2,15 @@ import pool from './postgre.pool.js';
 import Privilege from '../model/privilege.js';
 import {listPrivilegesQuery, getPrivilegeQuery, updatePrivilegeQuery, insertPrivilegeQuery, deletePrivilegeQuery} from './queries/privileges.queries.js'
 
-const createPrivilegeObjectFromRow = (row) => {
-  return new Privilege(row.id, row.name, row.description);
-}
-
 class PrivilegesDatabaseHandler {
 
+  /**
+   * Retrieve a privilege from DB.
+   * 
+   * @param {*} id The id of the privilege to retrieve
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   getPrivilege = (id, callback, errorCallback) => {
 
     pool.query(getPrivilegeQuery(id) , (error, results) => {
@@ -25,6 +28,13 @@ class PrivilegesDatabaseHandler {
     })
   };
 
+  /**
+   * Retrieve a list of privilege objects from the DB filter by the privilege name using the provided filter text.
+   * 
+   * @param {*} filter The filter text to filter the name by
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   getPrivileges = (filter, callback, errorCallback) => {
 
     pool.query(listPrivilegesQuery(filter), (error, results) => {
@@ -41,6 +51,13 @@ class PrivilegesDatabaseHandler {
     })
   };
 
+  /**
+   * Insert a privilege object to the DB.
+   * 
+   * @param {*} privilege The privilege object to insert
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   insertPrivilege = (privilege, callback, errorCallback) => {
 
     pool.query(insertPrivilegeQuery(privilege), (error, results) => {
@@ -54,6 +71,13 @@ class PrivilegesDatabaseHandler {
 
   };
 
+  /**
+   * Update a privilege object in DB>
+   * 
+   * @param {*} privilege The updated privilege object
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   updatePrivilege = (privilege, callback, errorCallback) => {
 
     pool.query(updatePrivilegeQuery(privilege), (error, results) => {
@@ -67,6 +91,13 @@ class PrivilegesDatabaseHandler {
 
   };
 
+  /**
+   * Delete a pririlege entry from DB.
+   * 
+   * @param {*} id The privilege Id to delete
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   deletePrivilege = (id, callback, errorCallback) => {
 
     pool.query(deletePrivilegeQuery(id), (error, results) => {
@@ -80,6 +111,16 @@ class PrivilegesDatabaseHandler {
 
   };
 
+}
+
+/**
+ * Converts a JSON object to a Privilege entity.
+ * 
+ * @param {*} row The JSON object to convert to
+ * @returns A Privilege object created from the provided JSON
+ */
+const createPrivilegeObjectFromRow = (row) => {
+  return new Privilege(row.id, row.name, row.description);
 }
 
 export default new PrivilegesDatabaseHandler();

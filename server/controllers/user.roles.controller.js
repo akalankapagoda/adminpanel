@@ -26,7 +26,6 @@ class UserRolesController {
 
     }
 
-    // 
     /**
      * Retrieve and return all User_Roles from the database filtered by the user_id if provided in the request.
      * 

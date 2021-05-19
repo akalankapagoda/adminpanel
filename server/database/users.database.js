@@ -8,12 +8,18 @@ import {  listUsersQuery,
           getUserByUsernameQuery,
           getUserWithHashQuery } from './queries/users.queries.js';
 
-const createUserObjectFromRow = (row) => {
-  return new User(row.id, row.username, row.name, row.email);
-}
-
+/**
+ * Handles DB operations related to User entity.
+ */
 class UsersDatabaseHandler {
 
+  /**
+   * Retrieve a User from DB.
+   * 
+   * @param {*} id The Id of the user to retrieve data of
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   getUser = (id, callback, errorCallback) => {
 
     pool.query(getUserQuery(id), (error, results) => {
@@ -31,6 +37,13 @@ class UsersDatabaseHandler {
     })
   };
 
+  /**
+   * Retrieve a list of users filtered by the name using the filter value provided.
+   * 
+   * @param {*} filter The filter value to filter the names
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   getUsers = (filter, callback, errorCallback) => {
 
     pool.query(listUsersQuery(filter), (error, results) => {
@@ -48,6 +61,13 @@ class UsersDatabaseHandler {
     })
   };
 
+  /**
+   * Insert a User record into the Db.
+   * 
+   * @param {*} user The User object to insert
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   insertUser = (user, callback, errorCallback) => {
 
     pool.query(insertUserQuery(user), (error, results) => {
@@ -61,6 +81,13 @@ class UsersDatabaseHandler {
 
   };
 
+  /**
+   * Update a User record in the DB.
+   * 
+   * @param {*} user The updated user object
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   updateUser = (user, callback, errorCallback) => {
 
     pool.query(updateUserQuery(user), (error, results) => {
@@ -74,6 +101,13 @@ class UsersDatabaseHandler {
 
   };
 
+  /**
+   * Delete a user record from DB.
+   * 
+   * @param {*} id The id of the record to delete
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   deleteUser = (id, callback, errorCallback) => {
 
     pool.query(deleteUserQuery(id), (error, results) => {
@@ -87,6 +121,13 @@ class UsersDatabaseHandler {
 
   };
 
+  /**
+   * Retrieve a User object from the DB using the username.
+   * 
+   * @param {*} username The username of the user to retieve
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   getUserByUsername = (username, callback, errorCallback) => {
 
     pool.query(getUserByUsernameQuery(username), (error, results) => {
@@ -110,6 +151,13 @@ class UsersDatabaseHandler {
     })
   };
 
+  /**
+   * Retrieve a User object from with additional password information.
+   * 
+   * @param {*} user_id The Id of the User to reteive details of
+   * @param {*} callback Function to call on success
+   * @param {*} errorCallback Function to call on Failure
+   */
   getUserWithHash = (user_id, callback, errorCallback) => {
 
     pool.query(getUserWithHashQuery(user_id), (error, results) => {
@@ -133,6 +181,16 @@ class UsersDatabaseHandler {
     })
   };
 
+}
+
+/**
+ * Convert a JSON object to a User object.
+ * 
+ * @param {*} row The JSON object to convert
+ * @returns A User object populated using the information provided in the JSON
+ */
+const createUserObjectFromRow = (row) => {
+  return new User(row.id, row.username, row.name, row.email);
 }
 
 export default new UsersDatabaseHandler();

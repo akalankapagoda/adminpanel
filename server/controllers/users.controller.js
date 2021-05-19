@@ -8,7 +8,13 @@ import {generateUserHash} from '../auth/password.manager.js';
 import {handleDatabaseError, handleGenericError} from '../error/error.handler.js';
 
 class UsersController {
-    // Create and Save a new Users
+
+    /**
+     * Create and Save a new Users
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     create = (req, res) => {
 
         var user = new User(null, req.body.username, req.body.name, req.body.email);
@@ -26,7 +32,12 @@ class UsersController {
 
     }
 
-    // Retrieve and return all Users from the database.
+    /**
+     * Retrieve and return all Users from the database.
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     findAll =  (req, res) => {
 
         var filter = req.query.filter;
@@ -46,7 +57,12 @@ class UsersController {
 
     }
 
-    // Find a single User with a Id
+    /**
+     * Find a single User with a Id
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     findOne =  (req, res) => {
         var id = req.query.id;
 
@@ -67,7 +83,12 @@ class UsersController {
 
     }
 
-    // Update a user identified by the user Id in the request
+    /**
+     * Update a user identified by the user Id in the request
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     update = (req, res) => {
 
         var user = new User(req.body.id, req.body.username, req.body.name, req.body.email);
@@ -83,7 +104,12 @@ class UsersController {
 
     }
 
-    // Delete a user with the specified user id in the request
+    /**
+     * Delete a user with the specified user id in the request
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     remove =  (req, res) => {
 
         try {

@@ -1,11 +1,16 @@
 /**
- * Handles CRUD operations for Courses.
+ * Handles login request.
  */
 import {login} from '../auth/authHandler.js';
 
 class LoginController {
 
-    // Create and Save a new Course
+    /**
+     * Handles login request.
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
     login = (req, res) => {
         login(req, res);
     };

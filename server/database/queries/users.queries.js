@@ -1,3 +1,11 @@
+// Contains prepared queries to handle user entity
+
+/**
+ * Returns a prepared query to list users.
+ * 
+ * @param {*} filter Filter text to filter users by name
+ * @returns 
+ */
 export function listUsersQuery(filter) {
     return {
         name: 'user-list',
@@ -6,6 +14,12 @@ export function listUsersQuery(filter) {
     };
 };
 
+/**
+ * Returns a prepared query to retrieve a user.
+ * 
+ * @param {*} id User id to retrieve
+ * @returns A prepared query to retrieve a user
+ */
 export function getUserQuery(id) {
     return {
         name: 'user-get',
@@ -14,6 +28,12 @@ export function getUserQuery(id) {
     };
 };
 
+/**
+ * Returns a prepared query to insert a user.
+ * 
+ * @param {*} user User object to insert
+ * @returns A repared query to insert a user
+ */
 export function insertUserQuery(user) {
     return {
         name: 'user-insert',
@@ -22,6 +42,12 @@ export function insertUserQuery(user) {
     };
 }
 
+/**
+ * Returns a prepared query to update a user.
+ * 
+ * @param {*} user Update user object
+ * @returns A prepared query to update a user
+ */
 export function updateUserQuery(user) {
     return {
         name: 'user-update',
@@ -30,6 +56,12 @@ export function updateUserQuery(user) {
     };
 }
 
+/**
+ * Returns a prepared query to delete a user.
+ * 
+ * @param {*} id User id to delete
+ * @returns A prepared query to delete a user
+ */
 export function deleteUserQuery(id) {
     return {
         name: 'user-delete',
@@ -38,6 +70,12 @@ export function deleteUserQuery(id) {
     };
 }
 
+/**
+ * Returns a prepared query to retrieve a user by username.
+ * 
+ * @param {*} username The username of the user
+ * @returns A prepared query to retrieve a user by username
+ */
 export function getUserByUsernameQuery(username) {
     return {
         name: 'user.username-get',
@@ -46,6 +84,12 @@ export function getUserByUsernameQuery(username) {
     };
 }
 
+/**
+ * Returns a prepared query to retrieve a user including the password hash information.
+ * 
+ * @param {*} user_id User id of the user
+ * @returns A prepared query to retrieve a user including the password hash information
+ */
 export function getUserWithHashQuery(user_id) {
     return {
         name: 'user.userhash-get',

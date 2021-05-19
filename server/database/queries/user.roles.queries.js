@@ -1,9 +1,11 @@
+// Contains prepared queries to handle user_role entity
+
 /**
- * List user_roles.
+ * Returns a prepared query to list user_roles.
  * 
  * @param {*} roleId UserId to filter by
  * 
- * @returns User_Roles filter by the role Id or unfiltered if the roleId provided is empty
+ * @returns A prepared query to list User_Roles filter by the role Id or unfiltered if the roleId provided is empty
  */
 export function listUserRolesQuery(user_id) {
 
@@ -22,6 +24,13 @@ export function listUserRolesQuery(user_id) {
 
 };
 
+/**
+ * Returns a prepared query to insert a user_role.
+ * 
+ * @param {*} role_id Role Id to insert
+ * @param {*} privilege_id Privilege Id to insert
+ * @returns A prepared query to insert a user_role
+ */
 export function insertUserRolesQuery(role_id, privilege_id) {
     return {
         name: 'user.roles-insert',
@@ -30,6 +39,13 @@ export function insertUserRolesQuery(role_id, privilege_id) {
     };
 }
 
+/**
+ * Returns a prepared query to delete a user_role.
+ * 
+ * @param {*} role_id Role Id of the entry to delete
+ * @param {*} privilege_id Privilege Id of the entry to delete
+ * @returns A prepared query to delete a user_role
+ */
 export function deleteUserRolesQuery(role_id, privilege_id) {
     return {
         name: 'user.roles-delete',
