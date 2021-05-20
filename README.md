@@ -159,22 +159,22 @@ A JWT Token
 
 ### Dependencies
 
- - express  
+ - [express](https://expressjs.com/)
     A web framework which handles network and helps expose CRUD operations.
     
--   nodemon  
+-   [nodemon](https://www.npmjs.com/package/nodemon)
     Helps auto refresh the server when developing. Installed only on development mode.  
     
--   pg  
+-   [pg](https://www.npmjs.com/package/pg)
     NodeJS PostgreSQL client library  
     
--   jsonwebtoken  
+-   [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
     A library to handle secrets. This will allow hasing the passwords and allow creating and reading JWT to support endpoint security.  
 
-- dotenv
-   A library to manage environment specific configurations outside of the code
+-   [dotenv](https://www.npmjs.com/package/dotenv)
+    A library to manage environment specific configurations outside of the code
     
--   Mocha
+-   [Mocha](https://mochajs.org/)
     A test framework for unit testing.
 
 
@@ -261,12 +261,14 @@ A screencast is available [here](https://github.com/akalankapagoda/adminpanel/bl
 
 ### Dependencies
 
- - bloc
+ - [bloc](https://bloclibrary.dev/#/)
    A library to manage app states and ensure a unidirectional event flow.
    
- - http
+ - [http](https://pub.dev/packages/http)
     A library to do HTTP communication in Flutter
- - 
+
+ - [equatable](https://pub.dev/packages/equatable)
+    A library to facilitate checking if two objects are the same by removing the requirement of having to write boilerplate code for euals and hashCode.
 
 
 ### ​Further Improvements
