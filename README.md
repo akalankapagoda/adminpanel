@@ -67,8 +67,11 @@ Node JS is more afficient in building HTTP API's without the effort of having to
 
 ### How-to Run
 1. Clone this git project if it’s not already cloned.
-2. Navigate to the ‘server’ folder using command prompt or terminal.
-3. Execute the following command to run the module.
+2. Create a new Postgre DB.
+3. Execute the schema provided [here](https://github.com/akalankapagoda/adminpanel/blob/master/schema.sql?raw=true) to create the initial DB schema.
+4. Edit the 'server/.env' file and modify the DB details to connect to.
+6. Navigate to the ‘server’ folder using command prompt or terminal.
+7. Execute the following command to run the module.
 
     npm run dev
     
