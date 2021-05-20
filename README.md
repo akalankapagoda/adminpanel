@@ -58,7 +58,8 @@ The entities are converted into JSON objects as follows for carrying them betwee
 
 ## Server
 
-The Server is build using NodeJs.
+The Server is built using [NodeJs](https://nodejs.org/en/) which is a a JavaScript runtime which can be used to build server side applications.
+Node JS is more afficient in building HTTP API's without the effort of having to manage the server deployments manually, but with more flexibility. It is also very useful in dealing with JSON structures out of the box. Considering the fact that we chose [Flutter](https://flutter.dev/) to do the Mobile Application, both Flutter and Node falls into the same ecosystem and is therefore can be integrated affortlesslly.
 
 ### Prerequisites
 1. You need to have [Node](https://nodejs.org/) installed.
@@ -212,7 +213,7 @@ A JWT Token
 
 ## MobileUI
 
-A Sample Mobile UI is available which is built using Flutter to connect to the server and manage admin functions.
+A Sample Mobile UI is available which is built using [Flutter](https://flutter.dev/) to connect to the server and manage admin functions. Flutter is a major game changer when it comes to b uilding cross platform mobile application. The value in Flutter is with it's UI designs which comes with MaterialApp which comes pre-packed with all the gimmicks required for developing a seamingly beautiful application with effortless user interactions that is far beyond reach of any other available framework. This of course, is in exchange of sacrificing some customizability which can be neglected for many applications that does not need any platform specific features.
 
 The UI uses [Block State Management Library](https://bloclibrary.dev/#/) to manage UI states.
 
