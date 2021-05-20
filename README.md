@@ -156,6 +156,27 @@ A JWT Token
 | Create UserRole| POST| /userRoles| | Course UserRole| HTTP SC 200 |
 | Delete UserRole| DELETE| /userRoles| | id | HTTP SC 200 |
 
+### Dependencies
+
+ - express  
+    A web framework which handles network and helps expose CRUD operations.
+    
+-   nodemon  
+    Helps auto refresh the server when developing. Installed only on development mode.  
+    
+-   pg  
+    NodeJS PostgreSQL client library  
+    
+-   jsonwebtoken  
+    A library to handle secrets. This will allow hasing the passwords and allow creating and reading JWT to support endpoint security.  
+
+- dotenv
+   A library to manage environment specific configurations outside of the code
+    
+-   Mocha
+    A test framework for unit testing.
+
+
 ### ​Further Improvements
 
 1.  Input validations and sanitizing  
@@ -236,6 +257,16 @@ A screencast is available [here](https://github.com/akalankapagoda/adminpanel/bl
 ![Filter Users](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_51_02.png?raw=true)
 ![Edit User](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_51_17.png?raw=true)
 ![Add User](https://github.com/akalankapagoda/adminpanel/blob/master/screenshots/Android%20Emulator%20-%20New_Device_API_30_5554%2019_05_2021%2020_51_45.png?raw=true)
+
+### Dependencies
+
+ - bloc
+   A library to manage app states and ensure a unidirectional event flow.
+   
+ - http
+    A library to do HTTP communication in Flutter
+ - 
+
 
 ### ​Further Improvements
 
